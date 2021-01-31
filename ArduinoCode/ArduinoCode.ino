@@ -25,3 +25,23 @@ void loop()
   Serial.println(lightLevel);
 
 }
+
+void autoTune()
+{
+
+  if (lightLevel < low)
+  {
+    low = lightLevel;
+  }
+
+
+  if (lightLevel > high)
+  {
+    high = lightLevel;
+
+
+  lightLevel = map(lightLevel, low+30, high-30, 0, 255);
+  lightLevel = constrain(lightLevel, 0, 255);
+  }
+
+}
