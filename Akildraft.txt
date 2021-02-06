@@ -1,0 +1,62 @@
+
+/* represents what state the box is in. 0 for setup, 1 for on, 2 for on and they opened the box, 3 for
+if they finished successfully. */
+int state;
+
+// represents how long you want the bot to be closed in minutes
+int time;
+
+// represents what time the bot turned on
+longtimeStarted;
+
+void loop() {
+
+	if(state == 0) {
+		if(button1Pressed) {
+			time += 1;
+		}
+		
+		if(button2Pressed) {
+			time -= 1;
+		}
+		
+		if(button3Pressed) {
+			state == 1;
+			timeStarted = millis();
+		}		
+	}
+
+	else if(state == 1) {
+		/* Code for led light that indicates how much time is left */
+	
+		if(millis() > time*60000 + timeStarted) {
+			state = 3;
+		}
+
+		else if(boxOpened) {
+		state = 2;
+		}
+
+	}
+
+	else if(state == 2) {
+		/* code for making speakers bad noises*/
+	
+		if(button3pressed) {
+		state == 0;
+		}
+
+	}
+
+	else if(state == 3) {
+		/* code for making speakers play nice sounds*/
+	
+		if(button3pressed) {
+			state == 0;
+		}
+
+	}
+
+
+
+}
