@@ -52,10 +52,11 @@ void autoTune()
 
     int noteDuration = 1000 / noteDurations[thisNote];
 
-    if (lightLevel > high)
+    if (lightLevel > low)
   //so far, I added this conditon so that diode turns on and speaker turns on, I added this if conditon within the while loop of the speaker
   //to hopefully excecute the sound part only when the if condition is satisfied
     {
+      Serial.println("this condition was reached");
       high = lightLevel;
   
     lightLevel = map(lightLevel, low+30, high-30, 0, 255);
