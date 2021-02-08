@@ -1,8 +1,9 @@
 const int sensorPin = 0; //pin A0 == analog pin 0
 const int ledPin = 9; 
+const int buttonPin = 10;
 
 int lightLevel, low = 0, high = 1023;
-
+int buttonState = 0;
 #include "pitches.h" //speaker relevant
 
 // notes in the melody:
@@ -21,6 +22,7 @@ void setup()
 {
   //Setting pin 9 as the output
   pinMode(ledPin, OUTPUT);
+  pinMode(buttonPin, INPUT);
   Serial.begin(9600);
 }
 
@@ -28,7 +30,8 @@ void setup()
 
 void loop()
 {
-
+  buttonState = digitalRead(buttonPin);
+  Serial.println(buttonState);
   lightLevel = analogRead(sensorPin);
 
   //manualTune();  // manually change the range from light to dark
@@ -38,6 +41,7 @@ void loop()
 
   analogWrite(ledPin, lightLevel);
   Serial.println(lightLevel);
+  
 
 }
 
