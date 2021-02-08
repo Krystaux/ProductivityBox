@@ -3,7 +3,7 @@ const int ledPin = 9;
 
 int lightLevel, low = 0, high = 1023;
 
-#include "pitches.h" //speaker relevant 
+#include "pitches.h" //speaker relevant
 
 // notes in the melody:
 int melody[] = {
@@ -55,44 +55,43 @@ void autoTune()
     if (lightLevel > high)
   //so far, I added this conditon so that diode turns on and speaker turns on, I added this if conditon within the while loop of the speaker
   //to hopefully excecute the sound part only when the if condition is satisfied
-  {
-    high = lightLevel;
-
-  lightLevel = map(lightLevel, low+30, high-30, 0, 255);
-  lightLevel = constrain(lightLevel, 0, 255);
-    tone(8, melody[thisNote], noteDuration);
-
-    // to distinguish the notes, set a minimum time between them.
-
-    // the note's duration + 30% seems to work well:
-
-    int pauseBetweenNotes = noteDuration * 1.30;
-
-    delay(pauseBetweenNotes);
-
-    // stop the tone playing:
-
-    noTone(8);
-  }
-  }
+    {
+      high = lightLevel;
   
-
-
-
-{
-
-  if (lightLevel < low)
-  {
-    low = lightLevel;
+    lightLevel = map(lightLevel, low+30, high-30, 0, 255);
+    lightLevel = constrain(lightLevel, 0, 255);
+      tone(8, melody[thisNote], noteDuration);
+  
+      // to distinguish the notes, set a minimum time between them.
+  
+      // the note's duration + 30% seems to work well:
+  
+      int pauseBetweenNotes = noteDuration * 1.30;
+  
+      delay(pauseBetweenNotes);
+  
+      // stop the tone playing:
+  
+      noTone(8);
+    }
   }
+}  
 
 
- // if (lightLevel > high)
-  //{
-   // high = lightLevel;
-
-  //lightLevel = map(lightLevel, low+30, high-30, 0, 255);
-  //lightLevel = constrain(lightLevel, 0, 255);
-  //}
-}
-}
+// void tuneLightThingy()
+//{
+//
+////  if (lightLevel < low)
+////  {
+////    low = lightLevel;
+////  }
+//
+//
+// // if (lightLevel > high)
+//  //{
+//   // high = lightLevel;
+//
+//  //lightLevel = map(lightLevel, low+30, high-30, 0, 255);
+//  //lightLevel = constrain(lightLevel, 0, 255);
+//  //}
+//}
