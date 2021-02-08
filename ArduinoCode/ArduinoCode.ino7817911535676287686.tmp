@@ -44,6 +44,16 @@ void loop()
 void autoTune()
 {
 
+  if (lightLevel < low)
+  {
+    low = lightLevel;
+  }
+
+
+  if (lightLevel > high)
+  {
+    high = lightLevel;
+// Thinking of implementing the speaker trigger here
   for (int thisNote = 0; thisNote < 8; thisNote++) {
 
     // to calculate the note duration, take one second divided by the note type.
@@ -52,14 +62,6 @@ void autoTune()
 
     int noteDuration = 1000 / noteDurations[thisNote];
 
-    if (lightLevel > high)
-  //so far, I added this conditon so that diode turns on and speaker turns on, I added this if conditon within the while loop of the speaker
-  //to hopefully excecute the sound part only when the if condition is satisfied
-  {
-    high = lightLevel;
-
-  lightLevel = map(lightLevel, low+30, high-30, 0, 255);
-  lightLevel = constrain(lightLevel, 0, 255);
     tone(8, melody[thisNote], noteDuration);
 
     // to distinguish the notes, set a minimum time between them.
@@ -73,26 +75,11 @@ void autoTune()
     // stop the tone playing:
 
     noTone(8);
-  }
+//This probably won't work, might need to update pins and light level triggers
   }
   
-
-
-
-{
-
-  if (lightLevel < low)
-  {
-    low = lightLevel;
+  lightLevel = map(lightLevel, low+30, high-30, 0, 255);
+  lightLevel = constrain(lightLevel, 0, 255);
   }
 
-
- // if (lightLevel > high)
-  //{
-   // high = lightLevel;
-
-  //lightLevel = map(lightLevel, low+30, high-30, 0, 255);
-  //lightLevel = constrain(lightLevel, 0, 255);
-  //}
-}
 }
