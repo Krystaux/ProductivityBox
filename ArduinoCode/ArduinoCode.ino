@@ -19,6 +19,11 @@ int melody[] = {
   NOTE_C4, NOTE_G3, NOTE_G3, NOTE_A3, NOTE_G3, 0, NOTE_B3, NOTE_C4
 };
 
+int bad_melody[] = {
+
+  NOTE_G5, NOTE_A5, NOTE_G5, NOTE_A5, NOTE_G5, NOTE_A5, NOTE_G5, NOTE_A5
+};
+
 // note durations: 4 = quarter note, 8 = eighth note, etc.:
 int noteDurations[] = {
 
