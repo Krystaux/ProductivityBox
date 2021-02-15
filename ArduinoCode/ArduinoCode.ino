@@ -71,7 +71,11 @@ void loop()
     if(digitalRead(buttonThree)) {
       lightLevelLED = 0;
       analogWrite(ledPin, lightLevelLED);
-      while(lightLevel > 1){}
+      while(lightLevel > 1){
+        lightLevel = analogRead(sensorPin);
+        Serial.println(lightLevel);
+        delay(100);
+        }
       state = 1;
       timeStarted = millis();
     }   
