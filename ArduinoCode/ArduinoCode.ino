@@ -10,6 +10,7 @@ int lightLevel, low = 0, high = 1023;
 int buttonState = 0;
 int state;
 int timeLeft;
+int lightLevelLED = 0;
 
 long timeStarted;
 
@@ -53,21 +54,26 @@ void loop()
   Serial.print("State: ");
   Serial.println(state);
   if(state == 0) {
-    if(digitalRead(buttonOne)) {
+    if(digitalRead(buttonOne) && timeLeft < 5) {
       timeLeft += 1;
-      analogWrite(ledPin, 
+      lightLevelLED += (255/5);
+      analogWrite(ledPin, lightLevelLED);
       delay(1000);
     }
     
     if(digitalRead(buttonTwo) && timeLeft >= 1) {
       timeLeft -= 1;
+      lightLevelLED -= (255/5);
+      analogWrite(ledPin, lightLevelLED);
       delay(1000);
     }
     
     if(digitalRead(buttonThree)) {
+      lightLevelLED = 0;
+      analogWrite(ledPin, lightLevelLED);
       while(lightLevel > 1){}
-        state = 1;
-        timeStarted = millis();
+      state = 1;
+      timeStarted = millis();
     }   
   }
   else if(state == 1) {
