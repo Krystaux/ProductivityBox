@@ -14,7 +14,7 @@ int timeLeft;
 long timeStarted;
 
 // notes in the melody:
-int melody[] = {
+int good_melody[] = {
 
   NOTE_C4, NOTE_G3, NOTE_G3, NOTE_A3, NOTE_G3, 0, NOTE_B3, NOTE_C4
 };
@@ -85,6 +85,7 @@ void loop()
     /* code for making speakers bad noises*/
     lightLevel = analogRead(sensorPin);
     Serial.println("bad music");
+    playMelody(bad_melody);
     if(lightLevel < 10) {
     state = 1;
     }
@@ -93,21 +94,39 @@ void loop()
   else if(state == 3) {
     /* code for making speakers play nice sounds*/
     Serial.println("nice music");
-    if(true) {
-      state = 0;
-      timeLeft = 0;
-    }
+    playMelody(good_melody[]);
+    state = 0;
+    timeLeft = 0;
 
   }
   
 
-  //manualTune();  // manually change the range from light to dark
 
-  //autoTune();  // have the Arduino do the work for us!
+}
 
+void playMelody(int melody[]){
+    for (int thisNote = 0; thisNote < 8; thisNote++) {
 
-  //analogWrite(ledPin, lightLevel);
-  //Serial.println(lightLevel);
+    // to calculate the note duration, take one second divided by the note type.
+
+    //e.g. quarter note = 1000 / 4, eighth note = 1000/8, etc.
+
+    int noteDuration = 1000 / noteDurations[thisNote];
+
+    tone(8, melody[thisNote], noteDuration);
+
+    // to distinguish the notes, set a minimum time between them.
+
+    // the note's duration + 30% seems to work well:
+
+    int pauseBetweenNotes = noteDuration * 1.30;
+
+    delay(pauseBetweenNotes);
+
+    // stop the tone playing:
+
+    noTone(8);
+    }
   
 }
 
@@ -146,6 +165,14 @@ void autoTune()
   }
 }  
 
+  //manualTune();  // manually change the range from light to dark
+
+  //autoTune();  // have the Arduino do the work for us!
+
+
+  //analogWrite(ledPin, lightLevel);
+  //Serial.println(lightLevel);
+  
 
 // void tuneLightThingy()
 //{
